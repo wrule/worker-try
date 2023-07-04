@@ -1,12 +1,14 @@
 import cluster from 'cluster';
 
 function main() {
+  const func = (data: any) => {
+    console.log('主进程接收', data);
+  };
+
   if (cluster.isMaster) {
     console.log('主进程', process.pid);
-    const worker = cluster.fork();
-    worker.on('message', (data) => {
-      console.log('主进程接收', data);
-    });
+    const workers = Array(2).fill(0).map(() => cluster.fork());
+    workers.forEach((worker) => worker.on('message', func));
   } else {
     console.log('子进程', process.pid);
     setInterval(() => {
