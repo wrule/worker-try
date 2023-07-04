@@ -2,6 +2,11 @@
   "name": "worker-try",
   "version": "0.1.0",
   "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "node dist/index.js"
+  },
   "repository": "https://github.com/wrule/worker-try.git",
   "license": "MIT",
   "private": false
